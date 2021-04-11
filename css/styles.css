@@ -1,0 +1,43 @@
+.currQuant {
+    text-align: center;
+    display: inline-block;
+    margin: 25px;
+}
+
+.waitFinish {
+    text-align: center;
+    display: inline-block;
+    margin: 25px;
+}
+
+.currProcessTitle {
+    margin-left: 100px;
+}
+
+.currProcess {
+    margin-left: 100px;
+}
+
+.quantumLeftTitle {
+    margin-left: 240px;
+}
+
+.quantum {
+    margin-left: 240px;
+}
+
+.wtProcessTitle {
+    margin-left: 100px;
+}
+
+.wtProcess {
+    margin-left: 100px;
+}
+
+.finProcessTitle {
+    margin-left: 229px;
+}
+
+.finProcess {
+    margin-left: 229px;
+}
