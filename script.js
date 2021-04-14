@@ -1,7 +1,5 @@
 'use strict';
 
-const PROCESSES = ["P1", "P2", "P3", "P4", "P5", "P6"];
-
 const displayCurrProcess = function (message) {
     document.querySelector('.currProcess').textContent = message;
 };
@@ -139,17 +137,16 @@ function CalculateButton() {
 
         }
 
-
-    }
-
-    // Note -Implement a queue using an array or possibly the data structure "queue"?
-
 }
 
 function ResetButton() {
     document.getElementById("").reset();
 }
 //===== Calculator END =======
+
+
+
+
 
 // main() - Driver code 
 

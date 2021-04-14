@@ -1,3 +1,74 @@
+
+
+body {
+  background-color: #F0E2B3;
+  text-align: center;
+}
+
+.RoundRobinTable {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ProcessCell {
+  width: 100px;
+  height: 30px;
+  border: 1px solid black;
+}
+
+.tableOne {
+  padding: 20px;
+}
+
+.endRoundRobin {
+  padding: 40px;
+}
+
+.tableTwo {
+  padding: 20px;
+}
+
+.exampleBreak {
+  padding: 30px;
+}
+
+.CurrentQuantumRow {
+  border-bottom: 10px;
+}
+
+.infoLabel1 {
+  font-size: large;
+  font-weight: bold;
+
+}
+
+.infoLabel2 {
+  font-size: large;
+  font-weight: bold;
+}
+
+.infoTextField1 {
+  width: 200px;
+  height: 30px;
+  border: 1px solid black;
+  padding-right: 30px;
+}
+
+.infoTextField2 {
+  width: 200px;
+  height: 30px;
+  border: 1px solid black;
+  padding-right: 30px;
+}
+
+.infoTable {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
 .currQuant {
     text-align: center;
     display: inline-block;
@@ -8,6 +79,10 @@
     text-align: center;
     display: inline-block;
     margin: 25px;
+}
+
+.RoundRobinTable {
+
 }
 
 .currProcessTitle {
