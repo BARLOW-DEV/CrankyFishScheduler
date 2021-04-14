@@ -7,6 +7,26 @@
   <link rel="stylesheet" href="./css/styles.css">
 </head>
 
+<!-- radio to select algorithm -->
+<div>
+  Algorithm:
+  <form id="algorithm">
+    <input type="radio" name="algorithm" value="robin" /> Round Robin<br />
+    <input type="radio" name="algorithm" value="mlq" /> Multilevel Queue 
+  </form>
+  <br>
+</div>
+
+
+
+<p id="quantumParagraph" >Quantum:
+  <input style="width: 50px;" id="quantum" type="text" value="0" />
+</p>
+<input type="button" value="Go" onclick="draw();" />
+<br /><br />
+
+
+
 <body>
   <main>
     <section>
@@ -30,6 +50,8 @@
       </div>
     </section>
   </main>
+ 
+  
   <script src="script.js"></script>
 </body>
 
