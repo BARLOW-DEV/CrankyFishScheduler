@@ -8,29 +8,126 @@
 </head>
 
 <body>
-  <main>
-    <section>
-      <div class="currQuant">
-        <h4 class="currProcessTitle">Current Process:</h4>
-        <p class="currProcess"> </p>
-      </div>
-      <div class="currQuant">
-        <h4 class="quantumLeftTitle">Quantum Left:</h4>
-        <p class="quantum"> </p>
-      </div>
-    </section>
-    <section>
-      <div class="waitFinish">
-        <h4 class="wtProcessTitle">Waiting Processes:</h4>
-        <p class="wtProcess"> </p>
-      </div>
-      <div class="waitFinish">
-        <h4 class="finProcessTitle">Finished Processes:</h4>
-        <p class="finProcess"> </p>
-      </div>
-    </section>
-  </main>
-  <script src="script.js"></script>
+  <h2>Round Robin Scheduling with Preemptive Priority</h2>
+  <table class="RoundRobinTable">
+    <tr>
+      <th class="Columnheader">Process</th>
+      <th class="Columnheader">Burst Time</th>
+      <th class="Columnheader">Priority</th>
+      <th class="Columnheader">Arrival</th>
+    </tr>
+    <tr>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+    </tr>
+    <tr>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+    </tr>
+    <tr>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+    </tr>
+    <tr>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+    </tr>
+  </table>
+  <button type="button" name="button">Calculate</button>
+  <button type="button" name="button">Reset</button>
+  <div class="tableOne">
+
+  </div>
+  <section>
+    <div class="currQuant">
+      <h4 class="currProcessTitle">Current Process:</h4>
+      <p class="currProcess">Placeholder</p>
+    </div>
+    <div class="currQuant">
+      <h4 class="quantumLeftTitle">Quantum Left:</h4>
+      <p class="quantum">Placeholder</p>
+    </div>
+  </section>
+  <section>
+    <div class="waitFinish">
+      <h4 class="wtProcessTitle">Waiting Processes:</h4>
+      <p class="wtProcess">Placeholder</p>
+    </div>
+    <div class="waitFinish">
+      <h4 class="finProcessTitle">Finished Processes:</h4>
+      <p class="finProcess">Placeholder</p>
+    </div>
+    <div class="endRoundRobin"></div>
+  </section>
+
+  <h2>Multi-level Queue Scheduler with Two Queues</h2>
+  <table class="RoundRobinTable">
+    <tr>
+      <th class="Columnheader">Process</th>
+      <th class="Columnheader">Burst Time</th>
+      <th class="Columnheader">Priority</th>
+      <th class="Columnheader">Arrival</th>
+    </tr>
+    <tr>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+    </tr>
+    <tr>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+    </tr>
+    <tr>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+    </tr>
+    <tr>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+      <td class="ProcessCell"></td>
+    </tr>
+  </table>
+  <button type="button" name="button">Calculate</button>
+  <button type="button" name="button">Reset</button>
+
+  <div class="tableTwo"></div>
+
+  <section>
+    <div class="currQuant">
+      <h4 class="currProcessTitle">Current Process:</h4>
+      <p class="currProcess"> </p>
+    </div>
+    <div class="currQuant">
+      <h4 class="quantumLeftTitle">Quantum Left:</h4>
+      <p class="quantum"> </p>
+    </div>
+  </section>
+  <section>
+    <div class="waitFinish">
+      <h4 class="wtProcessTitle">Waiting Processes:</h4>
+      <p class="wtProcess"> </p>
+    </div>
+    <div class="waitFinish">
+      <h4 class="finProcessTitle">Finished Processes:</h4>
+      <p class="finProcess"> </p>
+    </div>
+    <div class="endRoundRobin"></div>
+  </section>
 </body>
+<script src="script.js"></script>
 
 </html>
