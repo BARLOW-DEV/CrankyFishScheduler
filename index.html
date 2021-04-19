@@ -4,41 +4,53 @@
 <head>
   <meta charset="utf-8">
   <title>CrankyFishScheduler</title>
-  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>  
+<body>
   <h2>Round Robin Scheduling with Preemptive Priority</h2>
-  <table class="RoundRobinTable">
+  <table id="inputTable" class="RoundRobinTable">
     <tr>
       <th class="Columnheader">Process</th>
+      <th class="Columnheader">Arrival</th>
       <th class="Columnheader">Burst Time</th>
       <th class="Columnheader">Priority</th>
-      <th class="Columnheader">Arrival</th>
     </tr>
     <tr>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
+      <td class="ProcessCell">P1</td>
+      <td class="ProcessCell">0</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="15" /></td>
+      <td id="priority" class="ProcessCell">40</td>
     </tr>
     <tr>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
+      <td class="ProcessCell">P2</td>
+      <td class="ProcessCell">1</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="25" /></td>
+      <td id="priority" class="ProcessCell">30</td>
     </tr>
     <tr>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
+      <td class="ProcessCell">P3</td>
+      <td class="ProcessCell">2</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="20" /></td>
+      <td id="priority" class="ProcessCell">30</td>
     </tr>
     <tr>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
+      <td class="ProcessCell">P4</td>
+      <td class="ProcessCell">3</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="15" /></td>
+      <td id="priority" class="ProcessCell">35</td>
+    </tr>
+    <tr>
+      <td class="ProcessCell">P5</td>
+      <td class="ProcessCell">4</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="15" /></td>
+      <td id="priority" class="ProcessCell">5</td>
+    </tr>
+    <tr>
+      <td class="ProcessCell">P6</td>
+      <td class="ProcessCell">5</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="10" /></td>
+      <td id="priority" class="ProcessCell">10</td>
     </tr>
   </table>
   <button type="button" name="button">Calculate</button>
@@ -65,8 +77,15 @@
       <h4 class="finProcessTitle">Finished Processes:</h4>
       <p class="finProcess">Placeholder</p>
     </div>
-    <div class="endRoundRobin"></div>
   </section>
+  <p id="quantumParagraph">Quantum:
+    <input style="width: 50px;" id="quantum" type="text" value="3" />
+  </p>
+  <input type="button" value="Go" onclick="RRdraw();" />
+  <br /><br />
+
+  <fresh>
+  </fresh>
 
   <h2>Multi-level Queue Scheduler with Two Queues</h2>
   <table class="RoundRobinTable">
@@ -127,8 +146,8 @@
     </div>
     <div class="endRoundRobin"></div>
   </section>
-
 </body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
 <script src="script.js"></script>
 
 </html>
