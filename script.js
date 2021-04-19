@@ -156,4 +156,3 @@ displayCurrProcess('P1 P2 P3');
 displayQuantum('1ms');
 displayWtProcess('P1 P2');
 displayFinProcess('P1 P2 P3');
-
