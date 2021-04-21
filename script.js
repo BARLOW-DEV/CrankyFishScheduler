@@ -1,5 +1,5 @@
 'use strict';
-
+// Round Robin
 const displayCurrProcess = function (message) {
     document.querySelector('.currProcess').textContent = message;
 };
@@ -15,6 +15,29 @@ const displayWtProcess = function (message) {
 const displayFinProcess = function (message) {
     document.querySelector('.finProcess').textContent = message;
 };
+
+// Multilevel Queue 
+const displayCurrProcess_MLQ = function (message) {
+    document.querySelector('.currProcess_MLQ').textContent = message;
+};
+
+const displayQuantum_MLQ = function (message) {
+    document.querySelector('.quantum_MLQ').textContent = message;
+};
+
+const displayQ1Waiting = function (message) {
+    document.querySelector('.wtProcess_Q1').textContent = message;
+};
+const displayQ2Waiting = function (message) {
+    document.querySelector('.wtProcess_Q2').textContent = message;
+};
+
+const displayFinProcess_MLQ = function (message) {
+    document.querySelector('.finProcess_MLQ').textContent = message;
+};
+
+
+
 
 //===== Calculator START =======
 
@@ -102,43 +125,43 @@ const ProcInfo_ML = [
 
 // Reference: https://codepen.io/faso/pen/zqWGQW?editors=0010
 
-//https://shivammitra.com/operating%20system/roundrobin-scheduling-program/# - Deriving from this program
 
 
-function CalculateButton() {
-    // Access element from HTML doc
-    let CalcButton = document.getElementById("").onclick;
 
-    // Variable decleration for computations
-    let total_turnaround_time = 0;
-    let total_waiting_time = 0;
-    let total_response_time = 0;
-    let total_idle_time = 0;
-    let indx;
+// function CalculateButton() {
+//     // Access element from HTML doc
+//     let CalcButton = document.getElementById("").onclick;
 
-    // Round robin scheduler
-    if (document.getElementById("algoritm").checked = true) {
-        let num_proc = 6;
-        // Note - Convert to JS
-        sort(p, p + n, compare1);
+//     // Variable decleration for computations
+//     let total_turnaround_time = 0;
+//     let total_waiting_time = 0;
+//     let total_response_time = 0;
+//     let total_idle_time = 0;
+//     let indx;
 
-        // Creates a queue for round robin process
-        let queue = new Queue();
-        let current_time = 0;
-        queue.push(0);
-        let completed = 0;
-        let mark = mark[100];
+//     // Round robin scheduler
+//     if (document.getElementById("algoritm").checked = true) {
+//         let num_proc = 6;
+//         // Note - Convert to JS
+//         sort(p, p + n, compare1);
 
-        // Note- find workaround in JS
-        //memset(mark,0,sizeof(mark));
-        mark[0] = 1;
+//         // Creates a queue for round robin process
+//         let queue = new Queue();
+//         let current_time = 0;
+//         queue.push(0);
+//         let completed = 0;
+//         let mark = mark[100];
 
-        while (completed != n) {
+//         // Note- find workaround in JS
+//         //memset(mark,0,sizeof(mark));
+//         mark[0] = 1;
 
-        }
+//         while (completed != n) {
 
-    }
-}
+//         }
+
+//     }
+// }
 
 function ResetButton() {
     document.getElementById("").reset();
@@ -408,6 +431,77 @@ function RRdraw() {
     animate();
 }
 
+// MULTILEVEL QUEUE STUFF
+function animate_L() {
+    $('freshL').prepend('<div id="curtain" style="position: absolute; right: 0; width:100%; height:100px;"></div>');
+
+    $('#curtain').width($('#resultTable').width());
+    $('#curtain').css({ left: $('#resultTable').position().left });
+
+    var sum = 0;
+    $('.exectime').each(function () {
+        sum += Number($(this).val());
+    });
+
+    console.log($('#resultTable').width());
+    var distance = $("#curtain").css("width");
+
+    animationStep_L(sum, 0);
+    jQuery('#curtain').animate({ width: '0', marginLeft: distance }, sum * 1000 / 2, 'linear');
+}
+function animateReset(){
+ //
+}
+function animationStep_L(steps, cur) {
+    $('#timer').html(cur);
+    if (cur < steps) {
+        setTimeout(function () {
+            animationStep_L(steps, cur + 1);
+        }, 500);
+    }
+    else {
+    }
+}
+function MLQdraw() {
+    $('freshL').html('');
+    var inputTableL = $('#inputTable tr');
+    var th = '';
+    var td = '';
+
+
+    var quantumMLQ = $('#quantumMLQ').val();
+    var executeTimes = [];
+
+    $.each(inputTableL, function (key, value) {
+        if (key == 0) return true;
+        var executeTime = parseInt($(value.children[2]).children().first().val());
+        var priority = parseInt($(value.children[3]).html())
+        executeTimes[key - 1] = { "executeTime": executeTime, "P": key - 1, "priority": priority };
+    });
+    var areWeThereYet = false;
+    while (!areWeThereYet) {
+        areWeThereYet = true;
+        $.each(executeTimes, function (key, value) {
+            if (value.executeTime > 0) {
+                th += '<th style="height: 60px; width: ' + (value.executeTime > quantumMLQ ? quantumMLQ : value.executeTime) * 20 + 'px;">P' + value.P + '</th>';
+                td += '<td>' + (value.executeTime > quantumMLQ ? quantumMLQ : value.executeTime) + '</td>';
+                value.executeTime -= quantumMLQ;
+                areWeThereYet = false;
+            }
+
+            displayCurrProcess("P" + value.P)
+        });
+    }
+    $('freshL').html('<table id="resultTable" style="width: 70%"><tr>'
+        + th
+        + '</tr><tr>'
+        + td
+        + '</tr></table>'
+    );
+
+    animate_L();
+}
+
 
 // main() - Driver code
 
@@ -416,4 +510,17 @@ function RRdraw() {
 displayCurrProcess('P1');
 displayQuantum('1ms');
 displayWtProcess('P1 P2');
+
 displayFinProcess('P1 P2 P3');
+
+displayFinProcess('P1 P2 P3');
+
+
+// Mutlielvel Queue
+displayCurrProcess_MLQ('P1');
+displayQuantum_MLQ('1ms');
+displayQ1Waiting('P1 P2');
+displayQ2Waiting('P1 P2');
+displayFinProcess_MLQ('P1 P2 P3');
+
+

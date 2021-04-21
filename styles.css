@@ -9,6 +9,10 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+.MLQTable{
+    margin-left: auto;
+  margin-right: auto;
+}
 
 .ProcessCell {
   width: 100px;
@@ -81,40 +85,40 @@ body {
     margin: 25px 25px 0px 25px;
 }
 
-.RoundRobinTable {
 
-}
-
-.currProcessTitle {
+.currProcessTitle, .currProcessTitle_MLQ {
     margin-left: 100px;
 }
 
-.currProcess {
+.currProcess, .currProcess_MLQ {
     margin-left: 100px;
 }
 
-.quantumLeftTitle {
+.quantumLeftTitle, .quantumLeftTitle_MLQ {
     margin-left: 240px;
 }
 
-.quantum {
+.quantum, .quantum_MLQ {
     margin-left: 240px;
 }
 
-.wtProcessTitle {
+.wtProcessTitle, .wtProcessTitle_MLQ {
     margin-left: 100px;
 }
 
-.wtProcess {
+.wtProcess, .wtProcess_Q1, .wtProcess_Q2{
     margin-left: 100px;
 }
 
-.finProcessTitle {
+.finProcessTitle, .finProcessTitle_MLQ {
     margin-left: 229px;
 }
 
-.finProcess {
+.finProcess, .finProcess_MLQ {
     margin-left: 229px;
+}
+.ganttChartTitle{
+ text-align: left;
 }
 
 fresh th {
@@ -126,10 +130,26 @@ fresh th {
 fresh td {
   border: 1px solid black;
   border-bottom: 0;
-  /*border-right: 0;*/
+ 
   height: 20px;
   text-align: left;
 }
+
+freshL th {
+  background: linear-gradient(WhiteSmoke, lightgray);
+  text-align: left;
+  border: 1px solid black;
+  height: 400px;
+}
+
+freshL td {
+  border: 1px solid black;
+  border-bottom: 0;
+
+  height: 20px;
+  text-align: left;
+}
+
 
 div th, div td {
   border: 1px solid black;
@@ -145,7 +165,7 @@ input {
   background-color: #F0E2B3;
 }
 
-#burst-time {
+#burst-time, #priorityQ, #arrival {
   border: none;
   background-color: #F0E2B3;
   text-align: center;
