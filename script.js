@@ -271,7 +271,7 @@ function recalculateServiceTime() {
         });
     }
 }
-
+// ROUND ROBIN STUFF 
 function findNextIndexWithPriority(currentIndex, priorities) {
     var currentPriority = 1000000;
     if (currentIndex != -1) currentPriority = priorities[currentIndex];
@@ -464,7 +464,7 @@ function animationStep_L(steps, cur) {
 }
 function MLQdraw() {
     $('freshL').html('');
-    var inputTableL = $('#inputTable tr');
+    var inputTableL = $('#inputTableL tr');
     var th = '';
     var td = '';
 
@@ -472,12 +472,15 @@ function MLQdraw() {
     var quantumMLQ = $('#quantumMLQ').val();
     var executeTimes = [];
 
+    // Sets the priorities per process
     $.each(inputTableL, function (key, value) {
         if (key == 0) return true;
-        var executeTime = parseInt($(value.children[2]).children().first().val());
-        var priority = parseInt($(value.children[3]).html())
-        executeTimes[key - 1] = { "executeTime": executeTime, "P": key - 1, "priority": priority };
+        var executeTime = parseInt($(value.children[1]).children().first().val());
+        var priority = parseInt($(value.children[2]).html())
+        executeTimes[key - 1] = { "executeTime": executeTime, "P": key, "priority": priority };
     });
+
+    // Runs gantt chart until false 
     var areWeThereYet = false;
     while (!areWeThereYet) {
         areWeThereYet = true;
