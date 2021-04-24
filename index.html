@@ -84,6 +84,9 @@
   <input class="Go" type="button" value="Go" onclick="RRdraw();" />
   <br /><br />
 
+  <p id="rrTimer">
+    Timer: <strong id="timer"></strong> sec
+  </p>
   <fresh>
   </fresh>
 
@@ -127,22 +130,18 @@
     </tr>
   </table>
 
-  <button type="button" name="button" value="Go" onclick="MLQdraw();">Calculate</button>
+  <input type="button" value="Calculate" onclick="MLQdraw();"></input>
 
   <button type="button" name="button" onclick="animateReset();">Reset</button>
 
   <p id="quantumParagraph">Priority 1 - Quantum:
-    <input style="width: 50px;" id="quantumMLQ" type="text" value="3" />
+    <input style="width: 50px;" id="quantumMLQ1" type="text" value="3" />
   </p>
   <p id="quantumParagraph">Priority 2 - Quantum:
-    <input style="width: 50px;" id="quantumMLQ" type="text" value="4" />
+    <input style="width: 50px;" id="quantumMLQ2" type="text" value="4" />
   </p>
-   
 
-
-  <div class="tableTwo"></div>
-
-  <section>
+  <!-- <section>
     <div class="currQuant">
       <h4 class="currProcessTitle_MLQ">Current Process:</h4>
       <p class="currProcess_MLQ">Placeholder</p>
@@ -159,17 +158,17 @@
       <h4 class="wtProcessTitle">Queue 2 Wating:</h4>
       <p class="wtProcess_Q2"> </p>
     </div>
-    <div class="waitFinish"> 
-      <h4 
-      class="finProcessTitle_MLQ">Finished Processes:</h4>
+    <div class="waitFinish">
+      <h4 class="finProcessTitle_MLQ">Finished Processes:</h4>
       <p class="finProcess_MLQ">Placeholder </p>
     </div>
     <h4 class="ganttChartTitle">Gantt Chart</h4>
-     
-    <div class="endRoundRobin"></div>
-  </section>
 
+  </section> -->
 
+  <p id="mqTimer">
+    Timer: <strong id="timer2"></strong> sec
+  </p>
   <freshL>
   </freshL>
 </body>

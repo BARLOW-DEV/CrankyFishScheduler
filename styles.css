@@ -10,7 +10,7 @@ body {
   margin-right: auto;
 }
 .MLQTable{
-    margin-left: auto;
+  margin-left: auto;
   margin-right: auto;
 }
 
@@ -172,9 +172,23 @@ input {
   background-color: #F0E2B3;
 }
 
+#curtain2 {
+  background-color: #F0E2B3;
+}
+
 #burst-time, #priorityQ, #arrival {
   border: none;
   background-color: #F0E2B3;
   text-align: center;
   user-select: none;
+}
+
+#rrTimer {
+  margin-left: 0px;
+  text-align: left;
+}
+
+#mqTimer {
+  margin-left: 0px;
+  text-align: left;
 }
