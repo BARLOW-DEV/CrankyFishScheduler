@@ -88,7 +88,7 @@
   </fresh>
 
   <h2>Multi-level Queue Scheduler with Two Queues</h2>
-  <table class="RoundRobinTable">
+  <table id="inputTableL" class="MLQTable">
     <tr>
       <th class="Columnheader">Process</th>
       <th class="Columnheader">Burst Time</th>
@@ -96,56 +96,82 @@
       <th class="Columnheader">Arrival</th>
     </tr>
     <tr>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
+      <td class="ProcessCell">P1</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="12"></td>
+      <td class="ProcessCell"><input id="priorityQ" class="initial exectime" type="text" value="1"></td>
+      <td class="ProcessCell"><input id="arrival" class="initial exectime" type="text" value="0"></td>
     </tr>
     <tr>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
+      <td class="ProcessCell">P2</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="8"></td>
+      <td class="ProcessCell"><input id="priorityQ" class="initial exectime" type="text" value="2"></td>
+      <td class="ProcessCell"><input id="arrival" class="initial exectime" type="text" value="4"></td>
     </tr>
     <tr>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
+      <td class="ProcessCell">P3</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="6"></td>
+      <td class="ProcessCell"><input id="priorityQ" class="initial exectime" type="text" value="1"></td>
+      <td class="ProcessCell"><input id="arrival" class="initial exectime" type="text" value="5"></td>
     </tr>
     <tr>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
-      <td class="ProcessCell"></td>
+      <td class="ProcessCell">P4</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="5"></td>
+      <td class="ProcessCell"><input id="priorityQ" class="initial exectime" type="text" value="2"></td>
+      <td class="ProcessCell"><input id="arrival" class="initial exectime" type="text" value="12"></td>
+    </tr>
+    <tr>
+      <td class="ProcessCell">P5</td>
+      <td class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="10"></td>
+      <td class="ProcessCell"><input id="priorityQ" class="initial exectime" type="text" value="2"></td>
+      <td class="ProcessCell"><input id="arrival" class="initial exectime" type="text" value="18"></td>
     </tr>
   </table>
-  <button type="button" name="button">Calculate</button>
-  <button type="button" name="button">Reset</button>
+
+  <button type="button" name="button" value="Go" onclick="MLQdraw();">Calculate</button>
+
+  <button type="button" name="button" onclick="animateReset();">Reset</button>
+
+  <p id="quantumParagraph">Priority 1 - Quantum:
+    <input style="width: 50px;" id="quantumMLQ" type="text" value="3" />
+  </p>
+  <p id="quantumParagraph">Priority 2 - Quantum:
+    <input style="width: 50px;" id="quantumMLQ" type="text" value="4" />
+  </p>
+   
+
 
   <div class="tableTwo"></div>
 
   <section>
     <div class="currQuant">
-      <h4 class="currProcessTitle">Current Process:</h4>
-      <p class="currProcess"> </p>
+      <h4 class="currProcessTitle_MLQ">Current Process:</h4>
+      <p class="currProcess_MLQ">Placeholder</p>
     </div>
     <div class="currQuant">
-      <h4 class="quantumLeftTitle">Quantum Left:</h4>
-      <p class="quantum"> </p>
+      <h4 class="quantumLeftTitle_MLQ">Quantum Left:</h4>
+      <p class="quantum_MLQ">Placeholder </p>
     </div>
   </section>
   <section>
     <div class="waitFinish">
-      <h4 class="wtProcessTitle">Waiting Processes:</h4>
-      <p class="wtProcess"> </p>
+      <h4 class="wtProcessTitle">Queue 1 Wating:</h4>
+      <p class="wtProcess_Q1"> </p>
+      <h4 class="wtProcessTitle">Queue 2 Wating:</h4>
+      <p class="wtProcess_Q2"> </p>
     </div>
-    <div class="waitFinish">
-      <h4 class="finProcessTitle">Finished Processes:</h4>
-      <p class="finProcess"> </p>
+    <div class="waitFinish"> 
+      <h4 
+      class="finProcessTitle_MLQ">Finished Processes:</h4>
+      <p class="finProcess_MLQ">Placeholder </p>
     </div>
+    <h4 class="ganttChartTitle">Gantt Chart</h4>
+     
     <div class="endRoundRobin"></div>
   </section>
+
+
+  <freshL>
+  </freshL>
 </body>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
 <script src="script.js"></script>

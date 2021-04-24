@@ -1,5 +1,5 @@
 'use strict';
-
+// Round Robin
 const displayCurrProcess = function (message) {
     document.querySelector('.currProcess').textContent = message;
 };
@@ -15,6 +15,29 @@ const displayWtProcess = function (message) {
 const displayFinProcess = function (message) {
     document.querySelector('.finProcess').textContent = message;
 };
+
+// Multilevel Queue 
+const displayCurrProcess_MLQ = function (message) {
+    document.querySelector('.currProcess_MLQ').textContent = message;
+};
+
+const displayQuantum_MLQ = function (message) {
+    document.querySelector('.quantum_MLQ').textContent = message;
+};
+
+const displayQ1Waiting = function (message) {
+    document.querySelector('.wtProcess_Q1').textContent = message;
+};
+const displayQ2Waiting = function (message) {
+    document.querySelector('.wtProcess_Q2').textContent = message;
+};
+
+const displayFinProcess_MLQ = function (message) {
+    document.querySelector('.finProcess_MLQ').textContent = message;
+};
+
+
+
 
 //===== Calculator START =======
 
@@ -102,19 +125,13 @@ const ProcInfo_ML = [
 
 // Reference: https://codepen.io/faso/pen/zqWGQW?editors=0010
 
-//https://shivammitra.com/operating%20system/roundrobin-scheduling-program/# - Deriving from this program
 
 
-async function CalculateRRButton() {
-    // Access element from HTML doc
-    //let CalcButton = document.getElementById("").onclick;
 
-    // Variable decleration for computations
-
-    // Variable decleration for computations
-    //let roundRobin = new RoundRobin();
+async function CalculateRRButton(quantum) {
+   
     var numberOfProcesses = 0;
-    var timeQuanta = 2;
+    var timeQuanta = quantum;
     var idle = false;
     var timeQuantaRemaining = timeQuanta;
     var timer = 0;
@@ -132,25 +149,6 @@ async function CalculateRRButton() {
     var complete = [];
     var completedP = [];
     var completedProcesses = [];
-    var processPriority = {   1: 0, 
-                              2: 0,
-                              3: 0,
-                              4: 0,
-                              5: 0,
-                              6: 0};
-    var inputTable = $('#inputTable tr');
-
-    
-    
-
-    // Round robin scheduler 
-       /* 
-    $.each(inputTable, function (key, value) {
-        if (key == 0) return true;
-        var executeTime = parseInt($(value.children[2]).children().first().val());
-        var priority = parseInt($(value.children[3]).children().first().val())
-        executeTimes[key - 1] = { "executeTime": executeTime, "P": key - 1, "priority": priority };
-        */
 
         for(var i = 0; i < ProcInfo_RR.length; i++) {
             arrival[i] = ProcInfo_RR[i].arrival;            //initializing queue, arrival time, burst time, remaining time
@@ -166,6 +164,7 @@ async function CalculateRRButton() {
             timer++;
         }
 
+
         for (var i = 0; i < numberOfProcesses; i++) { 
             complete[i] = false;   //Initializing the RR queue and completed processes array
             queue[i] = 0;
@@ -174,7 +173,8 @@ async function CalculateRRButton() {
             }
         }
 
-
+    }
+ 
         if(queue[0] == 0) {
             queue[0] = 1;
         }
@@ -299,9 +299,8 @@ async function CalculateRRButton() {
             if(idle == true) {
                 document.getElementById('currProcessRR').value = "idle";
             }
+          return completedP
         }
-
-      
 
         function sleep(ms) {
             return new Promise((accept) => {
@@ -325,15 +324,6 @@ async function CalculateRRButton() {
                 return;
             }
             queue[zeroIndex] = maxProcessIndex + 1;
-            /*
-            for(var j = 0; j < queue.length; j++) {
-                if() {
-                    var temp = queue[i];
-                    queue[i] = queue[i + 1];
-                    queue[i + 1] = temp;
-                }
-            }
-            */
         }
 
         function newArrival(ProcInfo_RR, processPriority, timer, numberOfProcesses, maxProcessIndex, queue) {
@@ -352,7 +342,6 @@ async function CalculateRRButton() {
             if (timer <= arrivalHighest || arrivalHighest == 0) {
                 if (timer == arrivalHighest) {
                     for(var i = 0; i < arrival.length; i++) {
-                        //if(arrival[i] == arrivalHighest) {
                         if(ProcInfo_RR[i].arrival == arrivalHighest) {
                             maxProcessIndex = i;
                             newArrival = true;
@@ -457,7 +446,7 @@ async function CalculateRRButton() {
 }
 
 
-/*
+
 
 function animate() {
     $('fresh').prepend('<div id="curtain" style="position: absolute; right: 0; width:100%; height:100px;"></div>');
@@ -527,15 +516,104 @@ function RRdraw() {
 
     animate();
 }
-*/
+
+
+// MULTILEVEL QUEUE STUFF
+function animate_L() {
+    $('freshL').prepend('<div id="curtain" style="position: absolute; right: 0; width:100%; height:100px;"></div>');
+
+    $('#curtain').width($('#resultTable').width());
+    $('#curtain').css({ left: $('#resultTable').position().left });
+
+    var sum = 0;
+    $('.exectime').each(function () {
+        sum += Number($(this).val());
+    });
+
+    console.log($('#resultTable').width());
+    var distance = $("#curtain").css("width");
+
+    animationStep_L(sum, 0);
+    jQuery('#curtain').animate({ width: '0', marginLeft: distance }, sum * 1000 / 2, 'linear');
+}
+function animateReset(){
+ //
+}
+function animationStep_L(steps, cur) {
+    $('#timer').html(cur);
+    if (cur < steps) {
+        setTimeout(function () {
+            animationStep_L(steps, cur + 1);
+        }, 500);
+    }
+    else {
+    }
+}
+function MLQdraw() {
+    $('freshL').html('');
+    var inputTableL = $('#inputTableL tr');
+    var th = '';
+    var td = '';
+
+
+    var quantumMLQ = $('#quantumMLQ').val();
+    var executeTimes = [];
+
+    // Sets the priorities per process
+    $.each(inputTableL, function (key, value) {
+        if (key == 0) return true;
+        var executeTime = parseInt($(value.children[1]).children().first().val());
+        var priority = parseInt($(value.children[2]).html())
+        executeTimes[key - 1] = { "executeTime": executeTime, "P": key, "priority": priority };
+    });
+
+    // Runs gantt chart until false 
+    var areWeThereYet = false;
+    while (!areWeThereYet) {
+        areWeThereYet = true;
+        $.each(executeTimes, function (key, value) {
+            if (value.executeTime > 0) {
+                th += '<th style="height: 60px; width: ' + (value.executeTime > quantumMLQ ? quantumMLQ : value.executeTime) * 20 + 'px;">P' + value.P + '</th>';
+                td += '<td>' + (value.executeTime > quantumMLQ ? quantumMLQ : value.executeTime) + '</td>';
+                value.executeTime -= quantumMLQ;
+                areWeThereYet = false;
+            }
+
+            displayCurrProcess("P" + value.P)
+        });
+    }
+    $('freshL').html('<table id="resultTable" style="width: 70%"><tr>'
+        + th
+        + '</tr><tr>'
+        + td
+        + '</tr></table>'
+    );
+
+    animate_L();
+}
 
 
 // main() - Driver code
 
 // Note - In the calculator portion - Use conditional statements to replace the elements in these four functions below
-/*
+
 displayCurrProcess('P1');
 displayQuantum('1ms');
 displayWtProcess('P1 P2');
 displayFinProcess('P1 P2 P3');
-*/
+
+
+displayFinProcess('P1 P2 P3');
+
+displayFinProcess('P1 P2 P3');
+
+
+// Mutlielvel Queue
+displayCurrProcess_MLQ('P1');
+displayQuantum_MLQ('1ms');
+displayQ1Waiting('P1 P2');
+displayQ2Waiting('P1 P2');
+displayFinProcess_MLQ('P1 P2 P3');
+
+
+
