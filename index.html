@@ -53,7 +53,7 @@
       <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="10" /></td>
     </tr>
   </table>
-  <button class="RR_Calculate" type="button" name="button" onclick="CalculateRRButton()">Calculate</button>
+  <button class="RR_Calculate" type="button" name="button" onclick="CalculateRRButton(document.getElementById('timeQuantumRR').value)">Calculate</button>
   <button type="button" name="button">Reset</button>
   <div class="tableOne">
 
@@ -79,7 +79,7 @@
     </div>
   </section>
   <p id="quantumParagraph">Quantum:
-    <input style="width: 50px;" id="quantum" type="text" value="3" />
+    <input style="width: 150px;" id="timeQuantumRR" type="text" placeholder="Enter Time Quantum"/>
   </p>
   <input class="Go" type="button" value="Go" onclick="RRdraw();" />
   <br /><br />
