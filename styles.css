@@ -10,7 +10,7 @@ body {
   margin-right: auto;
 }
 .MLQTable{
-    margin-left: auto;
+  margin-left: auto;
   margin-right: auto;
 }
 
@@ -159,16 +159,13 @@ table {
   border-collapse: collapse;
 }
 input {
-  border: none;
-  background-color: #F0E2B3;
   text-align: center;
 }
-
-.Go {
-  border: 1px solid black;
-  background-color: greenyellow;
-}
 #curtain {
+  background-color: #F0E2B3;
+}
+
+#curtain2 {
   background-color: #F0E2B3;
 }
 
@@ -177,4 +174,14 @@ input {
   background-color: #F0E2B3;
   text-align: center;
   user-select: none;
+}
+
+#rrTimer {
+  margin-left: 0px;
+  text-align: left;
+}
+
+#mqTimer {
+  margin-left: 0px;
+  text-align: left;
 }

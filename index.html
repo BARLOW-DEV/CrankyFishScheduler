@@ -18,39 +18,57 @@
     </tr>
     <tr>
       <td id="process" class="ProcessCell">P1</td>
-      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text" value="0" /></td>
-      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="15" /></td>
-      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="40" /></td>
+      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text"
+          value="0" /></td>
+      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="15" />
+      </td>
+      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="40" />
+      </td>
     </tr>
     <tr>
       <td id="process" class="ProcessCell">P2</td>
-      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text" value="25" /></td>
-      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="25" /></td>
-      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="30" /></td>
+      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text"
+          value="25" /></td>
+      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="25" />
+      </td>
+      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="30" />
+      </td>
     </tr>
     <tr>
       <td id="process" class="ProcessCell">P3</td>
-      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text" value="30" /></td>
-      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="20" /></td>
-      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="30" /></td>
+      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text"
+          value="30" /></td>
+      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="20" />
+      </td>
+      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="30" />
+      </td>
     </tr>
     <tr>
       <td id="process" class="ProcessCell">P4</td>
-      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text" value="50" /></td>
-      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="15" /></td>
-      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="35" /></td>
+      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text"
+          value="50" /></td>
+      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="15" />
+      </td>
+      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="35" />
+      </td>
     </tr>
     <tr>
       <td id="process" class="ProcessCell">P5</td>
-      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text" value="100" /></td>
-      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="15" /></td>
-      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="5" /></td>
+      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text"
+          value="100" /></td>
+      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="15" />
+      </td>
+      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="5" />
+      </td>
     </tr>
     <tr>
       <td id="process" class="ProcessCell">P6</td>
-      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text" value="105" /></td>
-      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="10" /></td>
-      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="10" /></td>
+      <td id="arrivalTime" class="ProcessCell" value="0"><input id="arrivalTime" class="arrival" type="text"
+          value="105" /></td>
+      <td id="burstTime" class="ProcessCell"><input id="burst-time" class="initial exectime" type="text" value="10" />
+      </td>
+      <td id="priority" class="ProcessCell"><input id="priority" class="priority_value" type="text" value="10" />
+      </td>
     </tr>
   </table>
   <button class="RR_Calculate" type="button" name="button" onclick="CalculateRRButton(document.getElementById('timeQuantumRR').value)">Calculate</button>
@@ -79,11 +97,14 @@
     </div>
   </section>
   <p id="quantumParagraph">Quantum:
-    <input style="width: 150px;" id="timeQuantumRR" type="text" placeholder="Enter Time Quantum"/>
+    <input style="width: 150px;" id="timeQuantumRR" type="text" placeholder="Enter Time Quantum" value="10"/>
   </p>
   <input class="Go" type="button" value="Go" onclick="RRdraw();" />
   <br /><br />
 
+  <p id="rrTimer">
+    Timer: <strong id="timer"></strong> sec
+  </p>
   <fresh>
   </fresh>
 
@@ -127,22 +148,16 @@
     </tr>
   </table>
 
-  <button type="button" name="button" value="Go" onclick="MLQdraw();">Calculate</button>
-
-  <button type="button" name="button" onclick="animateReset();">Reset</button>
+  <input type="button" value="Calculate" onclick="MLQdraw();"></input>
 
   <p id="quantumParagraph">Priority 1 - Quantum:
-    <input style="width: 50px;" id="quantumMLQ" type="text" value="3" />
+    <input style="width: 50px;" id="quantumMLQ1" type="text" value="3" />
   </p>
   <p id="quantumParagraph">Priority 2 - Quantum:
-    <input style="width: 50px;" id="quantumMLQ" type="text" value="4" />
+    <input style="width: 50px;" id="quantumMLQ2" type="text" value="4" />
   </p>
-   
 
-
-  <div class="tableTwo"></div>
-
-  <section>
+  <!-- <section>
     <div class="currQuant">
       <h4 class="currProcessTitle_MLQ">Current Process:</h4>
       <p class="currProcess_MLQ">Placeholder</p>
@@ -159,17 +174,17 @@
       <h4 class="wtProcessTitle">Queue 2 Wating:</h4>
       <p class="wtProcess_Q2"> </p>
     </div>
-    <div class="waitFinish"> 
-      <h4 
-      class="finProcessTitle_MLQ">Finished Processes:</h4>
+    <div class="waitFinish">
+      <h4 class="finProcessTitle_MLQ">Finished Processes:</h4>
       <p class="finProcess_MLQ">Placeholder </p>
     </div>
     <h4 class="ganttChartTitle">Gantt Chart</h4>
-     
-    <div class="endRoundRobin"></div>
-  </section>
 
-
+  </section> -->
+ 
+  <p id="mqTimer">
+    Timer: <strong id="timer2"></strong> sec
+  </p>
   <freshL>
   </freshL>
 </body>

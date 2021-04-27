@@ -39,10 +39,6 @@ const displayFinProcess_MLQ = function (message) {
 };
 
 
-
-
-//===== Calculator START =======
-
 // ROUND ROBIN 
 // Structure 
 var quantum = document.getElementById("timeQuantumRR").value;
@@ -81,57 +77,201 @@ const ProcInfo_RR = [
         process: 6,
         burstTime: 10,
         priority: 10,
-        arrival: 105 
+        arrival: 105
+    }
+
+]
+
+const ProcInfo_RRTwo = [
+    {
+        process: 1,
+        burstTime: 15,
+        priority: 40,
+        arrival: 0
+    },
+    {
+        process: 2,
+        burstTime: 25,
+        priority: 30,
+        arrival: 25
+    },
+    {
+        process: 3,
+        burstTime: 20,
+        priority: 30,
+        arrival: 30
+    },
+    {
+        process: 4,
+        burstTime: 15,
+        priority: 35,
+        arrival: 50
+    },
+    {
+        process: 5,
+        burstTime: 15,
+        priority: 5,
+        arrival: 100
+    },
+    {
+        process: 6,
+        burstTime: 10,
+        priority: 10,
+        arrival: 105
     }
 
 ]
 
 
 // MULTILEVEL QUEUE
-const ProcInfo_ML = [
+
+let mqProcesses = [
     {
-        pro: 1,
-        burstTime: 12,
-        priorityQ: 1,
-        arrival: 0
+
+        id: 'P1',
+        burst: 12,
+        arrival: 0,
+        priority: 1
     },
     {
-        pro: 2,
-        burstTime: 8,
-        priorityQ: 2,
+        id: 'P2',
+        burst: 8,
         arrival: 4,
+        priority: 2
     },
     {
-        pro: 3,
-        burstTime: 6,
-        priorityQ: 1,
+        id: 'P3',
+        burst: 6,
         arrival: 5,
+        priority: 1
     },
     {
-        pro: 4,
-        burstTime: 5,
-        priorityQ: 2,
+        id: 'P4',
+        burst: 5,
         arrival: 12,
+        priority: 2
     },
     {
-        pro: 5,
-        burstTime: 10,
-        priorityQ: 2,
+        id: 'P5',
+        burst: 10,
         arrival: 18,
-    },
+        priority: 2
+    }
+];
 
-]
+function mqAlgo(processes, mq1Quantum, mq2Quantum) {
 
+    let finishedMQ = [];
+    let timer = 0;
+    let currTime = 0;
+    let queue1 = [];
+    let queue2 = [];
+    let queue1Seq = [];
+    let added = false;
+    let processesCopy = JSON.parse(JSON.stringify(processes))
+    console.log(processesCopy)
+    // initialize timer
+    processesCopy.forEach(el => timer += el.burst)
+    // functions to mock queue functionality
+    function enqueue(item, queue) {
+        queue.push(item)
+    };
 
-// Time qunatum/Time Slice 
-//let TQ = 10; 
+    function dequeue(queue) {
+        queue.shift()
+    };
+
+    // process queue1 and queue2
+    while (currTime < timer) {
+        let cycleTime = 0;
+
+        // check for waiting processes and add to queue1 or queue2
+        processesCopy.forEach(el => {
+            if (el.arrival <= currTime) {
+                if (el.priority === 1 && !queue1.includes(el) && el.burst > 0) {
+
+                    enqueue(el, queue1)
+                    queue1Seq.push([queue1])
+                    processesCopy = processesCopy.filter(item => item.id !== el.id)
+                }
+                if (el.priority === 2 && !queue2.includes(el) && el.burst > 0) {
+                    enqueue(el, queue2)
+                    processesCopy = processesCopy.filter(item => item.id !== el.id)
+                }
+            }
+        })
+
+        // update queue1 and currTime and cycleTime
+        queue1.forEach(el => {
+
+            if (el.burst > 0 && !added) {
+
+                dequeue(queue1)
+                queue1Seq.push([queue1])
+                currTime += mq1Quantum
+                cycleTime += mq1Quantum
+
+                if (el.burst > 0) {
+                    processesCopy.forEach(el => {
+                        if (el.arrival < currTime && el.priority === 1) {
+
+                            enqueue(el, queue1)
+                            queue1Seq.push([queue1])
+                            processesCopy = processesCopy.filter(item => item.id !== el.id)
+                        }
+                    })
+                    enqueue(el, queue1)
+                    queue1Seq.push([queue1])
+                }
+
+                if (el.burst >= mq1Quantum) {
+                    finishedMQ.push({ id: el.id, burst: mq1Quantum })
+                } else {
+                    finishedMQ.push({ id: el.id, burst: el.burst })
+                }
+                el.burst -= mq1Quantum;
+                added = true;
+            }
+        })
+
+        added = false;
+
+        // update queue2 and currTime
+        queue2.forEach(el => {
+
+            if (el.burst > 0 && cycleTime === 0 && !added) {
+
+                dequeue(queue2)
+                if (el.burst > 0) {
+                    enqueue(el, queue2)
+                }
+
+                if (el.burst >= mq2Quantum) {
+                    finishedMQ.push({ id: el.id, burst: mq2Quantum })
+                    currTime += mq2Quantum
+                } else {
+                    finishedMQ.push({ id: el.id, burst: el.burst })
+                    currTime += el.burst
+                }
+
+                el.burst -= mq2Quantum;
+                added = true;
+            }
+        })
+    }
+    console.log("finishedMQ =")
+    console.log(finishedMQ)
+    console.log("queue1Seq =")
+    console.log(queue1Seq)
+    return finishedMQ;
+}
+
 
 // Reference: https://codepen.io/faso/pen/zqWGQW?editors=0010
 
+// ROUND ROBIN STUFF 
 
-
-
-async function CalculateRRButton(quantum) {
+function CalculateRRButton(quantum) {
    
     var numberOfProcesses = 0;
     var currentProcess = "";
@@ -156,6 +296,7 @@ async function CalculateRRButton(quantum) {
     var didUpdatePriority = false;
     var processToPreempt = 0;
     var maxIndexAndCounter = [0, 0, 0]; //[maxProcessIndex, currentBurstTime, didUpdatePriority]
+    
     
 
         for(var i = 0; i < ProcInfo_RR.length; i++) {
@@ -203,7 +344,7 @@ async function CalculateRRButton(quantum) {
                 document.getElementById('quantumRR').value = timeQuantaRemaining + "ms";
                 while((maxIndexAndCounter[1] < timeQuanta) && (ProcInfo_RR[queue[0] - 1].burstTime > 0)) {
                     //maxIndexAndCounter[1] = maxIndexAndCounter[1] + 1;
-                    await sleep(500);
+                    //await sleep(500);
                     
                     waiting = [];
                     waitingProcesses = [];
@@ -275,7 +416,7 @@ async function CalculateRRButton(quantum) {
                 }
                 document.getElementById('quantumRR').value = timeQuantaRemaining + "ms";
 
-                await sleep(100);
+                //await sleep(100);
 
                 if ((ProcInfo_RR[queue[0]-1].burstTime == 0) && (complete[queue[0] - 1] == false)) {
                     turn[queue[0] - 1] = timer;        //turn currently stores exit times
@@ -311,7 +452,7 @@ async function CalculateRRButton(quantum) {
                     //currentBurstTime++;
                     maxIndexAndCounter[1] = maxIndexAndCounter[1] + 1;
                     var tempBurst = maxIndexAndCounter[1];
-                    await sleep(500);
+                    //await sleep(500);
                     if(timeQuantaRemaining == 0) {
                         timeQuantaRemaining = timeQuanta;
                     }
@@ -704,8 +845,10 @@ async function CalculateRRButton(quantum) {
                 }
             }
         }
+        console.log(processSequence);
         return processSequence;
 }
+
 
 function animate() {
     $('fresh').prepend('<div id="curtain" style="position: absolute; right: 0; width:100%; height:100px;"></div>');
@@ -713,16 +856,14 @@ function animate() {
     $('#curtain').width($('#resultTable').width());
     $('#curtain').css({ left: $('#resultTable').position().left });
 
-    var sum = 0;
-    $('.exectime').each(function () {
-        sum += Number($(this).val());
-    });
+    var sum = 125;
+    //ProcInfo_RRTwo.forEach(el => sum += el.burstTime)
 
     console.log($('#resultTable').width());
     var distance = $("#curtain").css("width");
 
     animationStep(sum, 0);
-    jQuery('#curtain').animate({ width: '0', marginLeft: distance }, sum * 1000 / 2, 'linear');
+    jQuery('#curtain').animate({ width: '0', marginLeft: distance }, sum * 500, 'linear');
 }
 
 function animationStep(steps, cur) {
@@ -738,35 +879,26 @@ function animationStep(steps, cur) {
 
 function RRdraw() {
     $('fresh').html('');
-    var inputTable = $('#inputTable tr');
     var th = '';
     var td = '';
 
 
-    var quantum = $('#quantum').val();
-    var executeTimes = [];
+    var quantum = parseInt($('#timeQuantumRR').val());
 
-    $.each(inputTable, function (key, value) {
-        if (key == 0) return true;
-        var executeTime = parseInt($(value.children[2]).children().first().val());
-        var priority = parseInt($(value.children[3]).children().first().val())
-        executeTimes[key - 1] = { "executeTime": executeTime, "P": key - 1, "priority": priority };
+    // Runs gantt chart until false 
+
+    var executeTimes = CalculateRRButton(quantum);
+
+    $.each(executeTimes, function (key, value) {
+        var x = parseInt(value.Burst);
+        th += '<th style="height: 60px; width: ' + (x > quantum ? quantum : x) * 20 + 'px;">' + value.P + '</th>';
+        td += '<td>' + x + '</td>';
+        console.log(x);
+
+
     });
-    var areWeThereYet = false;
-    while (!areWeThereYet) {
-        areWeThereYet = true;
-        $.each(executeTimes, function (key, value) {
-            if (value.executeTime > 0) {
-                th += '<th style="height: 60px; width: ' + (value.executeTime > quantum ? quantum : value.executeTime) * 20 + 'px;">P' + value.P + '</th>';
-                td += '<td>' + (value.executeTime > quantum ? quantum : value.executeTime) + '</td>';
-                value.executeTime -= quantum;
-                areWeThereYet = false;
-            }
 
-            displayCurrProcess("P" + value.P)
-        });
-    }
-    $('fresh').html('<table id="resultTable" style="width: 70%"><tr>'
+    $('fresh').html('<table id="resultTable" style="width: 90%;"><tr>'
         + th
         + '</tr><tr>'
         + td
@@ -776,31 +908,28 @@ function RRdraw() {
     animate();
 }
 
-
-
+$('freshL').prepend('<div id="curtain2" style="position: absolute; right: 0; width:100%; height:100px;"></div>');
 // MULTILEVEL QUEUE STUFF
-function animate_L() {
-    $('freshL').prepend('<div id="curtain" style="position: absolute; right: 0; width:100%; height:100px;"></div>');
 
-    $('#curtain').width($('#resultTable').width());
-    $('#curtain').css({ left: $('#resultTable').position().left });
+
+function animate_L() {
+    $('freshL').prepend('<div id="curtain2" style="position: absolute; right: 0; width:100%; height:100px;"></div>');
+
+    $('#curtain2').width($('#resultTable2').width());
+    $('#curtain2').css({ left: $('#resultTable2').position().left });
 
     var sum = 0;
-    $('.exectime').each(function () {
-        sum += Number($(this).val());
-    });
-
-    console.log($('#resultTable').width());
-    var distance = $("#curtain").css("width");
+    mqProcesses.forEach(el => sum += el.burst)
+    console.log("sum =" + sum)
+    console.log($('#resultTable2').width());
+    var distance = $("#curtain2").css("width");
 
     animationStep_L(sum, 0);
-    jQuery('#curtain').animate({ width: '0', marginLeft: distance }, sum * 1000 / 2, 'linear');
+    jQuery('#curtain2').animate({ width: '0', marginLeft: distance }, sum * 500, 'linear');
 }
-function animateReset(){
- //
-}
+
 function animationStep_L(steps, cur) {
-    $('#timer').html(cur);
+    $('#timer2').html(cur);
     if (cur < steps) {
         setTimeout(function () {
             animationStep_L(steps, cur + 1);
@@ -811,38 +940,25 @@ function animationStep_L(steps, cur) {
 }
 function MLQdraw() {
     $('freshL').html('');
-    var inputTableL = $('#inputTableL tr');
     var th = '';
     var td = '';
 
 
-    var quantumMLQ = $('#quantumMLQ').val();
-    var executeTimes = [];
-
-    // Sets the priorities per process
-    $.each(inputTableL, function (key, value) {
-        if (key == 0) return true;
-        var executeTime = parseInt($(value.children[1]).children().first().val());
-        var priority = parseInt($(value.children[2]).html())
-        executeTimes[key - 1] = { "executeTime": executeTime, "P": key, "priority": priority };
-    });
+    var quantumMLQ1 = parseInt($('#quantumMLQ1').val());
+    var quantumMLQ2 = parseInt($('#quantumMLQ2').val());
 
     // Runs gantt chart until false 
-    var areWeThereYet = false;
-    while (!areWeThereYet) {
-        areWeThereYet = true;
-        $.each(executeTimes, function (key, value) {
-            if (value.executeTime > 0) {
-                th += '<th style="height: 60px; width: ' + (value.executeTime > quantumMLQ ? quantumMLQ : value.executeTime) * 20 + 'px;">P' + value.P + '</th>';
-                td += '<td>' + (value.executeTime > quantumMLQ ? quantumMLQ : value.executeTime) + '</td>';
-                value.executeTime -= quantumMLQ;
-                areWeThereYet = false;
-            }
 
-            displayCurrProcess("P" + value.P)
-        });
-    }
-    $('freshL').html('<table id="resultTable" style="width: 70%"><tr>'
+    var executeTimes = mqAlgo(mqProcesses, quantumMLQ1, quantumMLQ2);
+
+    $.each(executeTimes, function (key, value) {
+
+        th += '<th style="height: 60px; width: ' + (value.burst > quantumMLQ2 ? quantumMLQ2 : value.burst) * 20 + 'px;">' + value.id + '</th>';
+        td += '<td>' + value.burst + '</td>';
+
+    });
+
+    $('freshL').html('<table id="resultTable2" style="width: 90%;"><tr>'
         + th
         + '</tr><tr>'
         + td
@@ -867,14 +983,4 @@ displayFinProcess('P1 P2 P3');
 
 displayFinProcess('P1 P2 P3');
 */
-
-
-// Mutlielvel Queue
-displayCurrProcess_MLQ('P1');
-displayQuantum_MLQ('1ms');
-displayQ1Waiting('P1 P2');
-displayQ2Waiting('P1 P2');
-displayFinProcess_MLQ('P1 P2 P3');
-
-
 
