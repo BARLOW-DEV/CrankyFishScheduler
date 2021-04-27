@@ -71,11 +71,6 @@
       </td>
     </tr>
   </table>
-  <button class="RR_Calculate" type="button" name="button" onclick="CalculateRRButton(document.getElementById('timeQuantumRR').value)">Calculate</button>
-  <button type="button" name="button">Reset</button>
-  <div class="tableOne">
-
-  </div>
   <section>
     <div class="currQuant">
       <h4 class="currProcessTitle">Current Process:</h4>
@@ -97,9 +92,10 @@
     </div>
   </section>
   <p id="quantumParagraph">Quantum:
-    <input style="width: 150px;" id="timeQuantumRR" type="text" placeholder="Enter Time Quantum" value="10"/>
+    <input style="width: 150px;" id="timeQuantumRR" type="text" placeholder="Enter Time Quantum" value="10" />
   </p>
-  <input class="Go" type="button" value="Go" onclick="RRdraw();" />
+  <p>In Order to change quantums you must refresh the page, and reenter the value or values.</p>
+  <input class="Go" type="button" value="Calculate" onclick="RRdraw();" />
   <br /><br />
 
   <p id="rrTimer">
@@ -181,7 +177,7 @@
     <h4 class="ganttChartTitle">Gantt Chart</h4>
 
   </section> -->
- 
+
   <p id="mqTimer">
     Timer: <strong id="timer2"></strong> sec
   </p>
