@@ -1,4 +1,10 @@
 # CrankyFishScheduler
+Code Compiliation Instructions:
+
+-Download the zip file or clone the program via a program such as Gitbash on windows or the terminal on Mac.<br/>
+-Open the following files using a compiler such as Visual Studio Code: index.html, script.js, and styles.css.<br/>
+-Open the index.html via the file explorer.<br/>
+-Follow the instructions listed on each algorithim.<br/>
 
 ROUND ROBIN WITH PREEMPTIVE PRIORITY
 
