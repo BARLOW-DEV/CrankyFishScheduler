@@ -1,5 +1,5 @@
 # CrankyFishScheduler
-Code Compiliation Instructions:
+CODE COMPILATION INSTRUCTIONS
 
 -Download the zip file or clone the program via a program such as Gitbash on windows or the terminal on Mac.<br/>
 -Open the following files using a compiler such as Visual Studio Code: index.html, script.js, and styles.css.<br/>
