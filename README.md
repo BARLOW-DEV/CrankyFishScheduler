@@ -1,7 +1,7 @@
 # CrankyFishScheduler
 CODE COMPILATION INSTRUCTIONS
 
--Download the zip file to file explorer. Alternatively, clone the program via a program such as Gitbash on windows or the terminal on Mac.<br/>
+-Download the zip file and store to file explorer. Alternatively, create an empty file on file explorer and clone the program via a program such as Gitbash on windows or the terminal on Mac.<br/>
 -Open the following files using a compiler such as Visual Studio Code: index.html, script.js, and styles.css.<br/>
 -Open the index.html via the file explorer.<br/>
 -Follow the instructions listed for each algorithim below.<br/>
