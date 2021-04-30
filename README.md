@@ -7,8 +7,8 @@ Below the table is a field that will accept a quantum time from the user. Once e
 If the user wishes to enter a different quantum time, the page will need to be refreshed (reloaded) in order to do so. Once the time quantum has been changed, again the user will select 'GO' and the gantt chart will display the appropriate ordering of tasks. 
 
 
-MULTILEVEL QUEUE WITH TWO PRIORITY QUEUES
+MULTILEVEL QUEUE WITH TWO PRIORITY QUEUES\
 
-Once the page is loaded, the user is introduced to a table informing the user the tasks (processes) that need to be completed: the priority of each task, the arrival time of each task, and the burst time of each task. The table is pre-filled with values in each task, but can be changed to the user's desire. 
-Below the table is a field that will accept two quantum times from the user. Once both are entered the user will press the 'Calculate' button to run the algorithm and print the gantt chart.
+Once the page is loaded, the user is introduced to a table informing the user the tasks (processes) that need to be completed: the priority of each task, the arrival time of each task, and the burst time of each task. The table is pre-filled with values in each task, but can be changed to the user's desire.\ 
+Below the table is a field that will accept two quantum times from the user. Once both are entered the user will press the 'Calculate' button to run the algorithm and print the gantt chart.\
 The user may enter different quantime times, but if the user wishes to reset the gantt chart, then the "Calculate" button will need to be clicked again. 
